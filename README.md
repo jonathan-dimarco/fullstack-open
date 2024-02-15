@@ -10,4 +10,7 @@
 
 ### Part 1
 
+- [x] Ex 1.1
+- [x] Ex 1.2
+
 ... in progress ...
