@@ -1,6 +1,6 @@
-# FullStack Open 2024 Bootcamp
+# FullStack Open 2024
 
-## Excercises from the Fullstack Open bootcamp by the Helsinki University
+## Excercises from the Fullstack Open by the Helsinki University
 
 #### Part 0
 
