@@ -16,5 +16,6 @@
 - [x] Ex 1.4
 - [x] Ex 1.5
 - [x] Ex 1.6
+- [x] Ex 1.7
 
 ... in progress ...

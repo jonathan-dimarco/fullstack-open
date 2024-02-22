@@ -19,6 +19,10 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const total = good + bad + neutral;
+  const average = (good - bad) / total;
+  const positive = (good / total) * 100;
+
   const handleGoodClick = () => {
     console.log("good clicked");
     setGood(good + 1);
@@ -47,6 +51,9 @@ const App = () => {
         <Counter text="good" value={good} />
         <Counter text="neutral" value={neutral} />
         <Counter text="bad" value={bad} />
+        <Counter text="total" value={total} />
+        <Counter text="average" value={average} />
+        <Counter text="positive" value={positive + " %"} />
       </div>
     </>
   );
