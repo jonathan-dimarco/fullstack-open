@@ -7,21 +7,38 @@ const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const Counter = ({ text, value }) => (
-  <p>
-    {text}: {value}
-  </p>
+const StatisticLine = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 );
 
-const App = () => {
-  // guarda los clics de cada botón en su propio estado
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-
+const Statistics = ({ good, neutral, bad }) => {
   const total = good + bad + neutral;
   const average = (good - bad) / total;
   const positive = (good / total) * 100;
+
+  return total === 0 ? (
+    <p>No feedback given yet</p>
+  ) : (
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="total" value={total} />
+        <StatisticLine text="average" value={average} />
+        <StatisticLine text="positive" value={positive + " %"} />
+      </tbody>
+    </table>
+  );
+};
+
+const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const handleGoodClick = () => {
     console.log("good clicked");
@@ -48,12 +65,7 @@ const App = () => {
       </div>
       <div>
         <Header text={"statistics"} />
-        <Counter text="good" value={good} />
-        <Counter text="neutral" value={neutral} />
-        <Counter text="bad" value={bad} />
-        <Counter text="total" value={total} />
-        <Counter text="average" value={average} />
-        <Counter text="positive" value={positive + " %"} />
+        <Statistics good={good} neutral={neutral} bad={bad} />
       </div>
     </>
   );
