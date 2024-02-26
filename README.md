@@ -20,5 +20,9 @@
 - [x] Ex 1.8
 - [x] Ex 1.9
 - [x] Ex 1.10
+- [x] Ex 1.11
+- [x] Ex 1.12
+- [x] Ex 1.13
+- [x] Ex 1.14
 
 ... in progress ...
