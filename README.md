@@ -25,4 +25,12 @@
 - [x] Ex 1.13
 - [x] Ex 1.14
 
+### Part 2
+
+- [x] Ex 2.1
+- [x] Ex 2.2
+- [x] Ex 2.3
+- [x] Ex 2.4
+- [x] Ex 2.5
+
 ... in progress ...
