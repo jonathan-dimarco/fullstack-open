@@ -1,6 +1,6 @@
 # FullStack Open 2024
 
-## Excercises from the Fullstack Open by the Helsinki University
+## Exercises from the Fullstack Open by the Helsinki University
 
 #### Part 0
 
