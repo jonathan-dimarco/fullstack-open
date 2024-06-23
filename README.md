@@ -32,5 +32,8 @@
 - [x] Ex 2.3
 - [x] Ex 2.4
 - [x] Ex 2.5
+- [x] Ex 2.6
+- [x] Ex 2.7
+- [x] Ex 2.8
 
 ... in progress ...
