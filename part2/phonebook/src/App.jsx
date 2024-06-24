@@ -2,10 +2,14 @@ import { useState } from "react";
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { id: 1, name: "Arto Hellas", number: 0 },
+    { name: "Arto Hellas", number: "040-123456", id: 1 },
+    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
+    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [filter, setFilter] = useState("");
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
@@ -14,6 +18,17 @@ const App = () => {
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
   };
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const personsToShow =
+    filter === ""
+      ? persons
+      : persons.filter((person) =>
+          person.name.toLowerCase().includes(filter.toLowerCase())
+        );
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -41,15 +56,22 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        <label>
+          Filter:
+          <input name="filter" value={filter} onChange={handleFilterChange} />
+        </label>
+      </div>
+      <h2>Add a new Contact</h2>
       <form onSubmit={addPerson}>
         <div>
           <label>
-            name:{" "}
+            Name:
             <input name="name" value={newName} onChange={handleNameChange} />
           </label>
         </div>
         <label>
-          number:{" "}
+          Number:
           <input
             name="number"
             value={newNumber}
@@ -58,13 +80,15 @@ const App = () => {
         </label>
         <div></div>
         <div>
-          <button type="submit">add</button>
+          <button type="submit">Add Contact</button>
         </div>
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => (
-          <li key={person.id}>{person.name}</li>
+        {personsToShow.map((person) => (
+          <li key={person.id}>
+            {person.name} {person.number}
+          </li>
         ))}
       </ul>
     </div>
