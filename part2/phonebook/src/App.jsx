@@ -52,11 +52,23 @@ const App = () => {
         number: newNumber,
       };
 
-      personsService.createPerson(newPerson).then((person) => {
+      personsService.create(newPerson).then((person) => {
         //console.log(person);
         setPersons(persons.concat(person));
         setNewName("");
         setNewNumber("");
+      });
+    }
+  };
+
+  const deletePerson = (id) => {
+    console.log(id);
+    const personToDelete = persons.filter((person) => person.id === id);
+    const name = personToDelete[0].name;
+    if (window.confirm(`Delete ${name}?`)) {
+      personsService.remove(id).then((removedPerson) => {
+        console.log(`${name} deleted succesfully`);
+        setPersons(persons.filter((person) => person.id !== removedPerson.id));
       });
     }
   };
@@ -76,7 +88,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <PersonList persons={personsToShow} />
+      <PersonList persons={personsToShow} deleteHandler={deletePerson} />
     </div>
   );
 };
