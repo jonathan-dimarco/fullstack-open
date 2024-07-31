@@ -39,25 +39,47 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
-    const nameExists = persons.some((person) => person.name === newName);
+    const nameExists = persons.some(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    );
     const numberExists = persons.some((person) => person.number === newNumber);
 
-    if (nameExists) {
-      alert(`${newName} is already added in the phonebook!`);
-    } else if (numberExists) {
+    if (numberExists) {
       alert(`The number ${newNumber} is already added in the phonebook!`);
+    } else if (nameExists) {
+      if (
+        window.confirm(
+          `${newName} is already added in the phonebook, replace the old number with a new one?`
+        )
+      ) {
+        const person = persons.find(
+          (person) => person.name.toLowerCase() === newName.toLowerCase()
+        );
+
+        const newPerson = {
+          ...person,
+          number: newNumber,
+        };
+
+        personsService.update(person.id, newPerson);
+        setPersons(persons.map((p) => (p.id !== person.id ? p : newPerson)));
+        setNewName("");
+        setNewNumber("");
+      }
     } else {
       const newPerson = {
         name: newName,
         number: newNumber,
       };
-
-      personsService.create(newPerson).then((person) => {
-        //console.log(person);
-        setPersons(persons.concat(person));
-        setNewName("");
-        setNewNumber("");
-      });
+      personsService
+        .create(newPerson)
+        .then((person) => {
+          //console.log(person);
+          setPersons(persons.concat(person));
+          setNewName("");
+          setNewNumber("");
+        })
+        .catch((error) => alert(`${error.message}`));
     }
   };
 

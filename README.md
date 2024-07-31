@@ -41,5 +41,6 @@
 - [x] Ex 2.12
 - [x] Ex 2.13
 - [x] Ex 2.14
+- [x] Ex 2.15
 
 ... in progress ...
