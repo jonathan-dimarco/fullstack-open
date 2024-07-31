@@ -11,10 +11,13 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    personsService.getAll().then((initialPersons) => {
-      //console.log(initialPersons);
-      setPersons(initialPersons);
-    });
+    personsService
+      .getAll()
+      .then((initialPersons) => {
+        //console.log(initialPersons);
+        setPersons(initialPersons);
+      })
+      .catch((error) => alert(`${error.message}`));
   }, []);
 
   const handleNameChange = (e) => {
@@ -61,10 +64,17 @@ const App = () => {
           number: newNumber,
         };
 
-        personsService.update(person.id, newPerson);
-        setPersons(persons.map((p) => (p.id !== person.id ? p : newPerson)));
-        setNewName("");
-        setNewNumber("");
+        personsService
+          .update(person.id, newPerson)
+          .then(
+            (updatedPerson) =>
+              setPersons(
+                persons.map((p) => (p.id !== person.id ? p : updatedPerson))
+              ),
+            setNewName(""),
+            setNewNumber("")
+          )
+          .catch((error) => alert(`${error.message}`));
       }
     } else {
       const newPerson = {
@@ -88,10 +98,15 @@ const App = () => {
     const personToDelete = persons.filter((person) => person.id === id);
     const name = personToDelete[0].name;
     if (window.confirm(`Delete ${name}?`)) {
-      personsService.remove(id).then((removedPerson) => {
-        console.log(`${name} deleted succesfully`);
-        setPersons(persons.filter((person) => person.id !== removedPerson.id));
-      });
+      personsService
+        .remove(id)
+        .then((removedPerson) => {
+          console.log(`${name} deleted succesfully`);
+          setPersons(
+            persons.filter((person) => person.id !== removedPerson.id)
+          );
+        })
+        .catch((error) => alert(`${error.message}`));
     }
   };
 
